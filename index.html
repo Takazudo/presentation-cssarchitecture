@@ -173,6 +173,8 @@ by Nicole Sullivan
 * 枠の中にモジュールがつまれていく
 * 枠をコーディング
 * モジュールをコーディング
+
+<p class="finally">積み木やレゴのようなもの</p>
 						</script>
 					</section>
 					<section data-markdown>
@@ -296,7 +298,243 @@ by Nicole Sullivan
 					</section>
 				</section>
 
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## 余白のルールを設ける
 
+* モジュールに一貫した余白のルールを
+* 例: 全部下に20pxマージン
+* 上にも下にもつけるとよく分からなくなる
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 大体下に20px設けた例
+
+* <a href="img/jise.png" target="_blank">モジュール一覧</a>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+* 汎用的に積まれるモジュールには<br>一貫した余白のルールを
+* ページ内の特定の場所に歯科存在しないモジュール<br>には特別な余白を設けても良い
+
+<p class="finally">なるべく単純にするのが良い</p>
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## 便利クラス
+
+モジュールを基本として考えた上で、  
+拡張して微調整するためのクラス
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## align
+
+	.ex-align-r { text-align:right; }
+	.ex-align-l { text-align:left; }
+	.ex-align-t { vertical-align:top; }
+	.ex-align-b { vertical-align:bottom; }
+
+<div></div>
+
+	<p class="mod-p ex-align-r">
+		部分的に右寄せにしたい
+	</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## margin
+
+	.ex-alittleupper { margin-top: -10px; }
+
+<div></div>
+
+	<div class="mod-moduleA ex-alittleupper">
+		ちょっと上に寄せたい
+	</div>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## ただし、作り過ぎない
+
+* 基本はモジュール
+* それらをあくまで微調整するだけ
+* やりすぎたら直にスタイルを書いてるのと同じ
+						</script>
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## Question
+
+<p class="finally">
+そんなこと言われても<br>
+うまいことモジュールに<br>
+分けられないんですけど
+</p>
+
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+* モジュールの大きさを決めるのは確かに難しい
+* 適度な粒度
+* 渡されたデザインをモジュールに分けると考えない
+* はじめからそのようにモジュールを<br>積んで作っていくものと考える
+
+<p class="finally">要するに設計の段階から<br>参加しているのがベター</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+でもなかなかそういう事ばかりではない…
+
+↓
+
+<p class="finally">
+デザインをコーディング段階で<br>
+ブラッシュアップし、<br>
+整理するつもりで取り組む
+</p>
+
+（いやむしろ、そういう仕事である）
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## Question
+
+でも細かく余白調節したいじゃないですか  
+デザイナーの意図っていうのもあるんですよ  
+ここは20pxで、こっちは30pxでとか…
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+その気持はよく分かる…
+
+<p class="larger">でもある程度諦めろ</p>
+
+なぜなら、
+
+<p class="finally">細かい余白の調節と量産効率性は<br>トレードオフの関係にあるから</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## おすすめの方法
+
+	<div class="mod-margin"></div>
+	<div class="mod-margin2"></div>
+	<div class="mod-margin3"></div>
+
+<div></div>
+
+	.mod-margin { height:10px; }
+	.mod-margin2 { height:20px; }
+	.mod-margin3 { height:30px; }
+
+開けたい場所に入れる。超単純
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## セマンティックじゃない！
+
+もちろん知ってるけど  
+そことも作りの単純さはトレードオフ
+
+* その細かいデザインの差が重要なのか？
+* HTMLのクリーンさが重要なのか？
+* 運用の効率性が重要なのか？
+
+この部分がCSSを書く部分で悩む部分  
+コードを書く者として提言すべき部分
+						</script>
+					</section>
+				</section>
+
+				<section class="slide-break">
+					<h1>2. もっと構造的に考える</h1>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## 名前空間
+
+	$('selector')
+
+<div></div>
+
+	var app = {};
+	app.goToNextPage = ...
+	app.goToPrevPage = ...
+
+関数や変数が干渉しないようにする仕組み
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## CSSには無い
+
+だがそれを意識してクラス名を命名する
+
+* mod- モジュール
+* frame- 枠
+* ex- 便利クラス
+
+<p>- や _ を名前空間の代わりとする</p>
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## モジュール名の決定
+
+どのようなモジュール名にすればよいか？
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## foobar
+
+foobar
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## foobar
+
+foobar
+						</script>
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## foobar
+
+foobar
+						</script>
+					</section>
+				</section>
 
 				<section data-markdown>
 					<script type="text/template">
