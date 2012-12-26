@@ -166,6 +166,9 @@ body {
 	line-height: 1.3;
 	padding-bottom:15px;
 }
+.reveal h2:last-child {
+	padding-bottom:0;
+}
 
 .reveal .slide-top h1 {
 	font-size:4em;
@@ -191,6 +194,7 @@ body {
 }
 .reveal p.larger {
 	font-size: 2em;
+	font-weight:bold;
 }
 .reveal p:last-child {
 	padding-bottom:0;
@@ -211,11 +215,48 @@ body {
 		padding-bottom:10px;
 	}
 
-.reveal pre {
+.reveal ul.mod-indexlist {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	width:100%;
 	font-size:.8em;
+}
+	.reveal ul.mod-indexlist li {
+		background:#fff;
+		margin:10px 0;
+		border-radius:10px;
+		color:#000;
+		text-align:center;
+		padding:.3em 0 .2em;
+	}
+	.reveal ul.mod-indexlist li.mod-indexlist-highlight {
+		background:#F1D765
+	}
+
+.reveal pre {
+	font-size:.9em;
 	margin-bottom:20px;
 }
 	.reveal pre code {
 		padding:18px 20px 15px;
 		border-radius:10px;
+		overflow:visible;
+		max-height:99999px;
 	}
+
+.reveal .buttonbase {
+	border:5px solid white;
+	border-radius:10px;
+	padding:.2em .5em;
+	color:white;
+	display:inline-block;
+	margin:0 10px;
+}
+.reveal .twitterbutton {
+	background:red;
+}
+.reveal .facebookbutton {
+	background:blue;
+}
+

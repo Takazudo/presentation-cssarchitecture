@@ -23,6 +23,9 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="js/myscript.js"></script>
 	</head>
 
 	<body>
@@ -67,13 +70,13 @@
 						<script type="text/template">
 ## CSSの超基本
 
-	<div class="something">
+	<div class="box">
 		hoge
 	</div>
 
 <div></div>
 
-	.something {
+	.box {
 		color: red;
 	}
 
@@ -84,15 +87,15 @@
 						<script type="text/template">
 <div></div>
 
-	<div class="something">
-		<div class="anything">
+	<div class="box">
+		<div class="inner">
 			hoge
 		</div>
 	</div>
 
 <div></div>
 
-	.something .anything {
+	.box .inner {
 		color: red;
 	}
 
@@ -111,7 +114,7 @@
 				<section>
 					<section data-markdown>
 						<script type="text/template">
-## ごちゃごちゃになります
+## しかし<br>ごちゃごちゃになります
 
 * かぶりだすクラス名
 * どこに書かれているのか分からないスタイル
@@ -123,7 +126,7 @@
 どこに書かれてるかわからない…  
 あーこれなんか効かないから上書きしよ…
 
-	.hoge .foo .bar {
+	.box .inner .inner2 {
 		color: red !important;
 	}
 						</script>
@@ -133,11 +136,11 @@
 よく分からないんでどんどん足していきます
 
 	/* 高津戸追加 */
-	.hoge{
+	.box{
 		color: red;
 	}
 	/* 田中追加 */
-	.hoge{
+	.box{
 		color: blue;
 	}
 						</script>
@@ -146,12 +149,7 @@
 						<script type="text/template">
 ## CSS is too fragile
 
-by Nicole Sullivan
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-## CSSはへぼい
+<p style="margin-top:-30px">by Nicolle Sullivan</p>
 
 * 一度オープンしたサイトは、ただ崩れていくのみ
 * なんとかその度合を減らしながら保守していく
@@ -161,8 +159,36 @@ by Nicole Sullivan
 					</section>
 				</section>
 
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## とりあえずはじめに<br>このセッションで<br>伝えたいこと
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+### コード書くだけでは<br>ちゃんとした設計は成り立たない
+
+<img src="img/workflow.png" alt="" width="700">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<p class="finally">
+CSS設計がうまくいくかどうかは<br>
+ページ設計の段階から関係してる<br>
+だからそこから参加する
+</p>
+
+<p class="finally">もしくは</p>
+
+<p class="finally">それまでの設計工程を<br>整理するつもりで臨め</p>
+						</script>
+					</section>
+				</section>
+
 				<section class="slide-break">
-					<h1>1. モジュール</h1>
+					<script>listindex(0)</script>
 				</section>
 
 				<section>
@@ -212,11 +238,11 @@ by Nicole Sullivan
 
 	.mod-moduleA { ... }
 		.mod-moduleA img { ... }
-		.mod-moduleA .hd { ... }
-		.mod-moduleA .bd { ... }
-			.mod-moduleA .bd h1 { ... }
-			.mod-moduleA .bd p { ... }
-		.mod-moduleA .ft { ... }
+		.mod-moduleA .head { ... }
+		.mod-moduleA .body { ... }
+			.mod-moduleA .body h1 { ... }
+			.mod-moduleA .body p { ... }
+		.mod-moduleA .foot { ... }
 
 モジュール名 = 起点となるクラス名
 						</script>
@@ -236,11 +262,11 @@ by Nicole Sullivan
 
 好き勝手にクラスを使う
 
-	.best { ... }
+	.inner { ... }
 	.top { ... }
-	.hd { ... }
-	.bd { ... }
-	.ft {
+	.head { ... }
+	.body { ... }
+	.foot {
 
 どこか知らないところでそのスタイルがあたってしまう  
 例: なんか知らないけど線がつきました…
@@ -253,6 +279,10 @@ by Nicole Sullivan
 その中でどんなクラス名を<br>使ってもかぶらない</p>
 						</script>
 					</section>
+				</section>
+
+				<section class="slide-break">
+					<script>listindex(1)</script>
 				</section>
 
 				<section>
@@ -292,10 +322,128 @@ by Nicole Sullivan
 ## Webサイトとは
 
 <p class="finally">枠を作り、モジュールを作り、<br>
-それをコピペして作っていく。<br>
-そういうものである。</p>
+それをコピペして作っていく<br>
+そういうものである</p>
 						</script>
 					</section>
+				</section>
+
+				<section class="slide-break">
+					<script>listindex(2)</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## モジュール名の決定
+
+どのようなモジュール名にすればよいか？
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 例その1
+
+<img src="img/nameex.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+
+↑ 抽象的
+
+* `mod-moduleA`
+* `mod-itemblock`
+* `mod-relateditems`
+* `mod-relatedbooks`
+* `mod-relatedbooknav`
+* `mod-amazonnav`
+
+↓ 具体的
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## `mod-itemblock` にした
+
+* `mod-amazonnav` :<br>Amazonへのリンクがないかもしれない
+* `mod-relatedbooknav` :<br>リンクしないかもしれない
+* `mod-relatedbooks` :<br>本以外が紹介されるかもしれない
+* `mod-relateditems` :<br>関連するもの以外が入るかもしれない
+* `mod-moduleA` :<br>それが何か全く情報がない
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 例その2
+
+<img src="img/nameex2.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## こうした
+
+## `mod-itemblock2`
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 具体的すぎず、<br>抽象的過ぎない名前
+
+* 具体的すぎると使い回しできない<br>例: `mod-relatedbooks`
+* 後で違う用途に使いたくなるかも
+* 最低限何か分かりそうなレベルの名前
+* 完全な正解は無い
+						</script>
+					</section>
+				</section>
+
+				<section class="slide-break">
+					<script>listindex(3)</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## Question
+
+<p class="finally">
+そんなこと言われても<br>
+うまいことモジュールに<br>
+分けられないんですけど
+</p>
+
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+* モジュールの大きさを決めるのは確かに難しい
+* 適度な粒度
+* 理想は、渡されたデザインを<br>モジュールに分けると考えないこと
+* はじめからそのようにモジュールを<br>積んで作っていくものと考える
+
+<p class="finally">要するに設計の段階から<br>参加しているのがベター</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+でもなかなかそういう事ばかりではない…
+
+↓
+
+<p class="finally">
+<span style="font-size:1.6em">Answer</span><br>
+デザインをコーディング段階で<br>
+ブラッシュアップし、<br>
+整理するつもりで取り組む
+</p>
+						</script>
+					</section>
+				</section>
+
+				<section class="slide-break">
+					<script>listindex(4)</script>
 				</section>
 
 				<section>
@@ -304,7 +452,7 @@ by Nicole Sullivan
 ## 余白のルールを設ける
 
 * モジュールに一貫した余白のルールを
-* 例: 全部下に20pxマージン
+* 例: 全部下に20pxマージン<br>見出しの下は10px
 * 上にも下にもつけるとよく分からなくなる
 						</script>
 					</section>
@@ -313,16 +461,86 @@ by Nicole Sullivan
 ## 大体下に20px設けた例
 
 * <a href="img/jise.png" target="_blank">モジュール一覧</a>
+
+（正確じゃないですが）
 						</script>
 					</section>
 					<section data-markdown>
 						<script type="text/template">
 * 汎用的に積まれるモジュールには<br>一貫した余白のルールを
-* ページ内の特定の場所に歯科存在しないモジュール<br>には特別な余白を設けても良い
+* ページ内の特定の場所にしか存在しないモジュール<br>には特別な余白を設けても良い
 
-<p class="finally">なるべく単純にするのが良い</p>
+<p class="finally">なるべく単純にするのが良い<br>より細かい調整はそれをベースに考える</p>
 						</script>
 					</section>
+				</section>
+
+
+				<section class="slide-break">
+					<script>listindex(5)</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## Question
+
+<p class="finally" style="font-size:1.2em">
+でも細かく余白調節したいじゃないですか<br>
+デザイナーの意図っていうのもあるんですよ<br>
+ここは20pxで、こっちは30pxでとか…
+</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+その気持はよく分かる…でも
+
+<p class="larger">
+Answer<br>
+ある程度諦めろ</p>
+
+なぜなら、
+
+<p class="finally">細かい余白の調節と量産効率性は<br>トレードオフの関係にあるから</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## おすすめの方法
+
+	<div class="mod-margin"></div>
+	<div class="mod-margin2"></div>
+	<div class="mod-margin3"></div>
+
+<div></div>
+
+	.mod-margin { height:10px; }
+	.mod-margin2 { height:20px; }
+	.mod-margin3 { height:30px; }
+
+開けたい場所に入れる。超単純
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## セマンティックじゃない！
+
+もちろん知ってるけど  
+そことも作りの単純さはトレードオフ
+
+* その細かいデザインの差が重要なのか？
+* HTMLのクリーンさが重要なのか？
+* 運用の効率性が重要なのか？
+
+状況に応じて適切なデザインを
+						</script>
+					</section>
+				</section>
+
+
+				<section class="slide-break">
+					<script>listindex(6)</script>
 				</section>
 
 				<section>
@@ -365,117 +583,526 @@ by Nicole Sullivan
 					</section>
 					<section data-markdown>
 						<script type="text/template">
-## ただし、作り過ぎない
+## ただし、使い過ぎない
 
 * 基本はモジュール
 * それらをあくまで微調整するだけ
 * やりすぎたら直にスタイルを書いてるのと同じ
-						</script>
-					</section>
-				</section>
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-## Question
+* 常に使っている箇所があれば、そこはそういう<br>スタイルを持ったモジュールとして定義せよ
 
-<p class="finally">
-そんなこと言われても<br>
-うまいことモジュールに<br>
-分けられないんですけど
-</p>
-
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-* モジュールの大きさを決めるのは確かに難しい
-* 適度な粒度
-* 渡されたデザインをモジュールに分けると考えない
-* はじめからそのようにモジュールを<br>積んで作っていくものと考える
-
-<p class="finally">要するに設計の段階から<br>参加しているのがベター</p>
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-でもなかなかそういう事ばかりではない…
-
-↓
-
-<p class="finally">
-デザインをコーディング段階で<br>
-ブラッシュアップし、<br>
-整理するつもりで取り組む
-</p>
-
-（いやむしろ、そういう仕事である）
-						</script>
-					</section>
-				</section>
-
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-## Question
-
-でも細かく余白調節したいじゃないですか  
-デザイナーの意図っていうのもあるんですよ  
-ここは20pxで、こっちは30pxでとか…
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-その気持はよく分かる…
-
-<p class="larger">でもある程度諦めろ</p>
-
-なぜなら、
-
-<p class="finally">細かい余白の調節と量産効率性は<br>トレードオフの関係にあるから</p>
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-## おすすめの方法
-
-	<div class="mod-margin"></div>
-	<div class="mod-margin2"></div>
-	<div class="mod-margin3"></div>
-
-<div></div>
-
-	.mod-margin { height:10px; }
-	.mod-margin2 { height:20px; }
-	.mod-margin3 { height:30px; }
-
-開けたい場所に入れる。超単純
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-## セマンティックじゃない！
-
-もちろん知ってるけど  
-そことも作りの単純さはトレードオフ
-
-* その細かいデザインの差が重要なのか？
-* HTMLのクリーンさが重要なのか？
-* 運用の効率性が重要なのか？
-
-この部分がCSSを書く部分で悩む部分  
-コードを書く者として提言すべき部分
+<p class="finally">モジュールを並べるのが基本<br>
+それを微調整するだけ</p>
 						</script>
 					</section>
 				</section>
 
 				<section class="slide-break">
-					<h1>2. もっと構造的に考える</h1>
+					<script>listindex(7)</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## OOCSS
+
+* Nicole Sullivan
+* 枠とモジュールと言う考え方
+* モジュールとスキンと言う考え方
+
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<div style="font-size:2em">
+	<span class="buttonbase twitterbutton">Twitter</span>
+	<span class="buttonbase facebookbutton">facebook</span>
+</div>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<div>
+	<span class="buttonbase twitterbutton">Twitter</span>
+	<span class="buttonbase facebookbutton">facebook</span>
+</div>
+
+<div style="height:20px"></div>
+
+	<span class="whiteborder redbg white">
+		Twitter
+	</span>
+	<span class="whiteborder bluebg white">
+		Facebook
+	</span>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<div>
+	<span class="buttonbase twitterbutton">Twitter</span>
+	<span class="buttonbase facebookbutton">facebook</span>
+</div>
+
+<div style="height:20px"></div>
+
+	<span class="twitterbutton">
+		Twitter
+	</span>
+	<span class="facebookbutton">
+		Facebook
+	</span>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<div></div>
+
+	.twitterbutton {
+		border:5px solid white;
+		border-radius:10px;
+		padding:.2em .5em;
+		color:white;
+		display:inline-block;
+		margin:0 10px;
+		background:red;
+	}
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<div></div>
+
+	.facebookbutton {
+		border:5px solid white;
+		border-radius:10px;
+		padding:.2em .5em;
+		color:white;
+		display:inline-block;
+		margin:0 10px;
+		background:blue; /* ここだけ違 */
+	}
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<div>
+	<span class="buttonbase twitterbutton">Twitter</span>
+	<span class="buttonbase facebookbutton">facebook</span>
+</div>
+
+<div style="height:20px"></div>
+
+	<span class="buttonbase twitterbutton">
+		Twitter
+	</span>
+	<span class="buttonbase facebookbutton">
+		Facebook
+	</span>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<div></div>
+
+	/* モジュール */
+	.buttonbase {
+		border:5px solid white;
+		border-radius:10px;
+		padding:.2em .5em;
+		color:white;
+		display:inline-block;
+		margin:0 10px;
+	}
+	/* スキン */
+	.twitterbutton {
+		background:red;
+	}
+	.facebookbutton {
+		background:blue;
+	}
+
+<div></div>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## OOCSSが<br>特に役立つケース
+
+* 似たモジュールが多く登場する場合
+* 複雑になるアプリケーションのUI
+
+OOCSSの話については  
+<a href="http://takazudo.github.com/blog/entry/2012-12-10-oocsssass.html" class="apply-nolazy" target="_blank">Takazudolog - OOCSSとSass</a>を参照のこと
+						</script>
+					</section>
+				</section>
+
+				<section class="slide-break">
+					<script>listindex(8)</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## jQuery UIのCSS
+
+* <a href="http://jqueryui.com/" target="_blank">jQuery UI</a>
+* <a href="http://docs.jquery.com/UI/Theming/API" target="_blank">jQuery UI CSS framework</a>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<img src="img/accordion.png" alt="">
+
+<pre style="font-size:.8em"><code>&lt;div class=&quot;ui-accordion&quot;&gt;
+    &lt;h3 class=&quot;ui-accordion-header&quot;&gt;...&lt;/h3&gt;
+    &lt;div class=&quot;ui-accordion-content&quot;&gt;
+        ...
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+要素の階層関係をハイフンで表す
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<img src="img/accordion2.png" alt="" width="700">
+
+	.ui-accordion-header-active {
+		/* アクティブ時の表示 */
+	}
+	.ui-accordion-content-active {
+		/* アクティブ時の表示 */
+	}
+
+状態の変化を追加のクラスで表す
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+* `ui-draggable` : ドラッグ＆ドロップ
+* `ui-autocomplete` : オートコンプリート
+* `ui-button` : ボタン
+* `ui-dialog` : ダイアログ
+* `ui-datepicker` : 日付選択
+* `ui-progressbar` : プログレスバー
+
+UIごとに名前空間的なクラス名を始めにつける
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## jQuery UI CSSの書き方
+
+* HTML的にはかなり冗長
+* 断片的なHTML／CSSを見るだけで<br>そこがどの部分かわかりやすい
+* 他の箇所に影響を及ばさない
+
+既に出来てるサイトに組み込んでも安心
+						</script>
+					</section>
+				</section>
+
+				<section class="slide-break">
+					<script>listindex(9)</script>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## 入れ子になるモジュール
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+入れ子になったモジュールとは？
+
+<img src="img/nest.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+モジュールの中にモジュール
+
+<img src="img/nest2.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 困ること
+
+* クラス名が被る
+* 複雑になる
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<img src="img/nest3.png" alt="" width="700">
+
+	.mod-moduleA { ... }
+	.mod-moduleA p { ... }
+
+<div></div>
+
+	.mod-moduleB { ... }
+	.mod-moduleB p { ... }
+
+↑ `.mod-moduleA p` も適用されてしまう
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 解決策
+
+	.mod-moduleA { ... }
+	.mod-moduleA-p { ... }
+
+<div></div>
+
+	<div class="mod-moduleA">
+		<p class="mod-moduleA-p">...</p>
+	</div>
+
+入れ子を許容するモジュールを  
+ガチガチにクラスで固める
+
+<p class="finally" style="margin-top:-30px">
+中に何が入っても安心
+</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<img src="img/nest4.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<p class="finally">
+しかし入れ子は複雑<br>
+なるべくシンプルに構成しよう
+</p>
+						</script>
+					</section>
+				</section>
+
+				<section class="slide-break">
+					<h1>最後に</h1>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## まとめ
+
+CSSには複雑な仕組みをうまく表す方法がない
+
+状況に応じてうまいこと設計しよう
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## CSSプリプロセッサ
+
+* 今日話した内容はなんとか<br>がんばってCSSで対応したような方法
+* 変数や継承等のプログラム的な機能が使える
+
+今日の話を聞いて  
+CSSプリプロセッサを設計に生かしましょう！
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+<p class="finally">ご清聴ありがとうございました</p>
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+おまけ（ボツ）
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## レイアウト分岐
+
+<img src="img/frames3.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<img src="img/frames2.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<img src="img/frames.png" alt="" width="800">
+
+どうCSSを書くか？
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+### 解決策1: 別のクラス名にする
+
+<img src="img/frames4.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+### 解決策2: html要素のクラスで分岐
+
+	<html class="layout-2col">
+
+<div></div>
+
+	.layout-2col .frame-main { ... }
+	.layout-2col .frame-side { ... }
+
+<div></div>
+
+	.layout-3col .frame-main { ... }
+	.layout-3col .frame-side { ... }
+	.layout-3col .frame-side2 { ... }
+	
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 応用例
+
+	<html class="category-compayinfo">
+
+<div></div>
+
+	.category-companyinfo .frame-main {
+		...
+	}
+	.category-companyinfo .mod-moduleA {
+		...
+	}
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 注意
+
+* 複雑なCSSを生みやすい
+* 単純に分けたほうが単純なこともある
+* 目的によって使い分ける（CMSに組み込むとか）
+						</script>
+					</section>
+				</section>
+
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## Question
+
+<p class="finally">
+既存のサイトに追加で<br>CSSを書き足すときはどうする？
+</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<p class="finally">
+<span style="font-size:1.6em">Answer</span><br>
+jQuery UIみたいな書き方で追加する
+</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 既存CSSは<br>ブラックボックス
+
+* 簡素なクラス名を使うと<br>思わぬスタイルが当たるかもしれない
+* どこか別の箇所にスタイルが<br>適用されてしまうかもしれない
+
+別の箇所に極力影響を及ぼさない書き方にする
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<div></div>
+
+	.mod-moduleA { ... }
+	.mod-moduleA-head { ... }
+	.mod-moduleA-body { ... }
+	.mod-moduleA-body-p { ... }
+	.mod-moduleA-foot { ... }
+
+これならかなり安全
+
+もしくは別のCSSファイルを作って読み込ませる等
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## Question
+
+<p class="finally">
+CSSファイルって<br>分けるべきなんですかね
+</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<p class="finally">
+<span style="font-size:1.6em">Answer</span><br>
+場合による
+</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<img src="img/separate.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 分けた場合
+
+* ページごとに読み込むCSSの量が最適化される
+* しかし管理が大変になる
+* どのページでも使われるような汎用的なモジュールはそもそも分ける意味が無い
+
+状況に応じて適切に対応
+						</script>
+					</section>
 				</section>
 
 				<section>
 					<section data-markdown>
 						<script type="text/template">
 ## 名前空間
+
+* 田中　たけし
+* 田中　ゆうこ
+* 鈴木　たけし
+* 二宮　たけし
+
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## JavaScript
 
 	$('selector')
 
@@ -499,6 +1126,8 @@ by Nicole Sullivan
 * ex- 便利クラス
 
 <p>- や _ を名前空間の代わりとする</p>
+
+これでクラス名の干渉がかなり防げる
 						</script>
 					</section>
 				</section>
@@ -506,267 +1135,9 @@ by Nicole Sullivan
 				<section>
 					<section data-markdown>
 						<script type="text/template">
-## モジュール名の決定
-
-どのようなモジュール名にすればよいか？
+おわり
 						</script>
 					</section>
-					<section data-markdown>
-						<script type="text/template">
-## foobar
-
-foobar
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-## foobar
-
-foobar
-						</script>
-					</section>
-				</section>
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-## foobar
-
-foobar
-						</script>
-					</section>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## でもjQuery mobileはなかなかイケてると思う
-
-* モバイルでつまづくことの解決策が<br>jQuery mobileのコードに結構書いてある
-* ちゃんとコンポーネントごとにコードが整理されてる
-* ダウンロードビルダーで必要なものだけ使える
-* ドキュメントにモバイルでの罠が色々書いてある
-
-<p class="finally">勉強にも実用にもかなりイイ</p>
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## 今日紹介するやつ
-
-* touchイベント
-* scrollイベント
-* loader widget
-* navigation
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## めんどくさいtouch系イベント
-
-* 非touch deviceではmouse events
-* touch deviceではtouch events
-* これをnormalizeするのが[pointer events](http://www.w3.org/Submission/pointer-events/)
-* でもpointer eventsはまだこれから
-
-<p class="finally">要するにtouchイベント周りはめんどい</p>
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## vmouseイベント
-
-mouse と touch をnormalizeした virtual mouseイベント
-
-* `vmouseover` / `vmouseout` 
-* `mousemove`
-* `vmousedown` `vmouseup`
-* `vclick`
-* `vmousecancel`
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## 見てみる
-
-* [デモ](./examples/01/1.html)
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## touchイベント
-
-vmouseの上にのっかってくるのがjQuery mobileのtouchイベント
-
-* `tap` - いわゆるクリック
-* `taphold` - 触ってしばらくすると
-* `swipe` - 触って30px動かす
-* `swiperight` - 右方向にswipe
-* `swipeleft` - 左方向にswipe
-
-<p class="finally">vmouseベースなのでPCでも動く</p>
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## 見てみる
-
-* [デモ](./examples/01/1.html)
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## scrollイベント
-
-* `scrollstart`
-* `scrollstop`
-
-なぜこのイベントは必要か？  
-
-iOSのscrollイベント起こらない問題
-
-それをnormailzeしたのがこのイベント
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## 見てみる
-
-* [デモ](./examples/01/1.html)
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## orientationchangeイベント
-
-* `landscape` とか `portrait` で教えてくれる
-* 非対応環境もpolyfill的にカバーしてくれる
-
-[デモ](./examples/01/1.html)
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## イベントまとめ
-
-イベント系は自分で実装するのが手間  
-しかし場合によっては避けて通れない  
-
-jQuery mobileの資産を有効利用しましょう
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## Loading widget
-
-真ん中でくるくるするアレ
-
-* position:fixed対応がめんどいけどうまいことやってくれる
-* loader自体はjQuery ui widgetベースでできてる
-* $.mobile.loading に loaderのインスタンスが生えてる
-
-こういうのやりたいことあるので地味に便利かも  
-真ん中寄せにしたい時はこのコード覗けばヒントが
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## 使い方カンタン
-
-	$.mobile.loading('show', {
-		text: 'message'
-		textVisible: true
-	});
-
-	$.mobile.loading('hide');
-
-カスタムのHTMLも出せる
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## 見てみる
-
-* [デモ](./examples/02/1.html)
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## navigation
-
-これは何か
-
-* [デモ](./examples/03/1.html)
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## pushState is hell
-
-pushStateで普通に遷移しているように見せるにはどうするか？  
-
-* ページの断片ajax、DOMを更新？
-* しかし非対応環境には...
-* そう考えると各ページは普通のHTMLである必要がある
-* HTMLを取得して必要な部分だけ正規表現でとってくる<br>→ それを元にページを更新
-
-<p class="finally">いろいろと面倒</p>
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## navigationの素敵な実装1
-
-* 同じドメインか
-* POST/GET
-* transitionsと方向
-* loading表示
-* title変更
-
-などなど色々とよく作られてる
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-## navigationの素敵な実装2
-
-* pushStateが利用できない<br>→ hashchangeで同じ事をしてくれる
-* 実はhashchangeで遷移<br>→ history.replaceStateでpushState遷移に見せてる
-* 気の利いたイベント多数
-* プラグインとしてURLルーターも導入可能 ([参考](http://jquerymobile.com/test/docs/pages/page-navmodel.html)）
-
-mobileだけではもったいないほどよくできてる  
-（というかこのコンポーネントはモバイル関係ない）
-					</script>
-				</section>
-
-
-				<section data-markdown>
-					<script type="text/template">
-## まとめ
-
-* なかなかヘビーな土台となるものの
-* 一つ一つが作りこまれていて
-* コンポーネント毎にちゃんと独立している
-* つまり jQuery mobile の実装はイケてる
-
-続く（かも）
-					</script>
 				</section>
 
 			</div>
