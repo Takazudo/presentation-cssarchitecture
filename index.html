@@ -35,6 +35,10 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 
+				<section class="slide-opening">
+					<img src="img/LP26-tobira.001.png" alt="">
+				</section>
+
 				<section class="slide-top">
 					<h1>CSSの設計</h1>
 					<p>高津戸壮 <a href="http://twitter.com/Takazudo">@Takazudo</a></p>
@@ -274,9 +278,10 @@ CSS設計がうまくいくかどうかは<br>
 					</section>
 					<section data-markdown>
 						<script type="text/template">
-<p class="finally"><code>mod-モジュール名</code><br>
-を起点にモジュールの<br>CSSを書いていけば、<br>
-その中でどんなクラス名を<br>使ってもかぶらない</p>
+<p class="finally">全て <code>mod-モジュール名</code><br>
+を起点にCSSを書く</p>
+<p>↓</p>
+<p class="finally">モジュール内でどんなクラス名を<br>使ってもかぶらない</p>
 						</script>
 					</section>
 				</section>
@@ -524,14 +529,12 @@ Answer<br>
 					</section>
 					<section data-markdown>
 						<script type="text/template">
-## セマンティックじゃない！
+## HTMLとして<br>それはどうなの？
 
-もちろん知ってるけど  
-そことも作りの単純さはトレードオフ
-
-* その細かいデザインの差が重要なのか？
+* 細かく計算されたデザインの実現が重要なのか？
 * HTMLのクリーンさが重要なのか？
 * 運用の効率性が重要なのか？
+* 余白のとり方も含めてデザインだけど…
 
 状況に応じて適切なデザインを
 						</script>
@@ -805,89 +808,6 @@ UIごとに名前空間的なクラス名を始めにつける
 				</section>
 
 				<section class="slide-break">
-					<script>listindex(9)</script>
-				</section>
-
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-## 入れ子になるモジュール
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-入れ子になったモジュールとは？
-
-<img src="img/nest.png" alt="" width="800">
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-モジュールの中にモジュール
-
-<img src="img/nest2.png" alt="" width="800">
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-## 困ること
-
-* クラス名が被る
-* 複雑になる
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-<img src="img/nest3.png" alt="" width="700">
-
-	.mod-moduleA { ... }
-	.mod-moduleA p { ... }
-
-<div></div>
-
-	.mod-moduleB { ... }
-	.mod-moduleB p { ... }
-
-↑ `.mod-moduleA p` も適用されてしまう
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-## 解決策
-
-	.mod-moduleA { ... }
-	.mod-moduleA-p { ... }
-
-<div></div>
-
-	<div class="mod-moduleA">
-		<p class="mod-moduleA-p">...</p>
-	</div>
-
-入れ子を許容するモジュールを  
-ガチガチにクラスで固める
-
-<p class="finally" style="margin-top:-30px">
-中に何が入っても安心
-</p>
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-<img src="img/nest4.png" alt="" width="800">
-						</script>
-					</section>
-					<section data-markdown>
-						<script type="text/template">
-<p class="finally">
-しかし入れ子は複雑<br>
-なるべくシンプルに構成しよう
-</p>
-						</script>
-					</section>
-				</section>
-
-				<section class="slide-break">
 					<h1>最後に</h1>
 				</section>
 
@@ -1131,6 +1051,86 @@ CSSファイルって<br>分けるべきなんですかね
 						</script>
 					</section>
 				</section>
+
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+## 入れ子になるモジュール
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+入れ子になったモジュールとは？
+
+<img src="img/nest.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+モジュールの中にモジュール
+
+<img src="img/nest2.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 困ること
+
+* クラス名が被る
+* 複雑になる
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<img src="img/nest3.png" alt="" width="700">
+
+	.mod-moduleA { ... }
+	.mod-moduleA p { ... }
+
+<div></div>
+
+	.mod-moduleB { ... }
+	.mod-moduleB p { ... }
+
+↑ `.mod-moduleA p` も適用されてしまう
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+## 解決策
+
+	.mod-moduleA { ... }
+	.mod-moduleA-p { ... }
+
+<div></div>
+
+	<div class="mod-moduleA">
+		<p class="mod-moduleA-p">...</p>
+	</div>
+
+入れ子を許容するモジュールを  
+ガチガチにクラスで固める
+
+<p class="finally" style="margin-top:-30px">
+中に何が入っても安心
+</p>
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<img src="img/nest4.png" alt="" width="800">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+<p class="finally">
+しかし入れ子は複雑<br>
+なるべくシンプルに構成しよう
+</p>
+						</script>
+					</section>
+				</section>
+
 
 				<section>
 					<section data-markdown>

@@ -9,8 +9,7 @@ window.listindex = function(highlight) {
     'もっと細かく余白を調節したい',
     '便利クラス',
     'OOCSS',
-    'jQuery UIのCSS',
-    '入れ子になるモジュール'
+    'jQuery UIのCSS'
   ];
 
   var html = '<ul class="mod-indexlist">'

@@ -170,6 +170,11 @@ body {
 	padding-bottom:0;
 }
 
+.reveal .slide-opening img {
+	position:relative;
+	bottom:-30px;
+}
+
 .reveal .slide-top h1 {
 	font-size:4em;
 	padding:50px 0 0;
